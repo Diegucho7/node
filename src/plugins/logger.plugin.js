@@ -1,30 +1,40 @@
 const winston = require('winston');
+const {combine, timestamp, json} = winston.format;
 
+const logger = winston.createLogger({
+  level: 'info',
+  format: combine( 
+    timestamp(), json() ),
+//   defaultMeta: { service: 'user-service' },
+  transports: [
+    //
+    // - Write all logs with importance level of `error` or less to `error.log`
+    // - Write all logs with importance level of `info` or less to `combined.log`
+    //
+    new winston.transports.File({ filename: 'error.log', level: 'error' }),
+    new winston.transports.File({ filename: 'combined.log' }),
+  ],
+});
 
-const logger = winston.createLogger({   
+logger.add(new winston.transports.Console({
+    format: winston.format.simple(),
+  }));
 
-    level: 'info',
-    format: winston.format.json(),
-    defaultMeta: { service: 'user-service' },
-    transports: [
-      //
-      // - Write to all logs with level `info` and below to `combined.log` 
-      // - Write all logs error (and below) to `error.log`.
-      //
-      new winston.transports.File({ filename: 'error.log', level: 'error' }),
-      new winston.transports.File({ filename: 'combined.log' }),
-      new winston.transports.Console()
-    ],
-  });
+//
+// If we're not in production then log to the `console` with the format:
+// `${info.level}: ${info.message} JSON.stringify({ ...rest }) `
+//
+module.exports = function buildLogger(service){
 
-
-  module.exports = function buildLogger(service){
-    return{
-        log: (message) => {
-            logger.log('info', {message,service });
+    return {
+        log:(message) =>{
+            logger.log('info',{message,service})
         },
-        error:(message) => {
-            logger.log('error', {message,service });
+        error:(message) =>{
+            logger.error('error',{
+                message,service,
+                //  at: new Date().toString() 
+                  })
         }
     }
 }
