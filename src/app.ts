@@ -1,15 +1,18 @@
 
+import { buildLogger } from "./plugins/logger.plugin";
 // const {emailTemplate} = require ('./src/js-fundation/01-tempate.js');
 // require ('./src/js-fundation/02-destructuring.js')
 // const { getUserById } = require ('./src/js-fundation/03-callback.js')
 // const {buildMakePerson} = require('./src/js-fundation/05-factory');
 // const { getUUID, getAge } = require('../02-node/src/plugins');
 // const { buildLogger } = require('./src/plugins');
+
+
  
-// const logger = buildLogger('app.js');
+const logger = buildLogger('app.js');
  
-// logger.log("Hola Mundo");
-// logger.error("Esto es algo malo");
+logger.log("Hola Mundo");
+logger.error("Esto es algo malo");
 // clase 6 inicio
 //    const {getPokemonById} = require('./src/js-fundation/06-promise')
 
@@ -17,8 +20,9 @@
 //                                 .catch((err) => console.log({err}))
 //                                 .finally(() => console.log('Finalizo'))
 // fin clase 6 
+export const info = 'Hola Mundo'
 
-console.log("Hola Mundo");
+console.log({info});
 
 
 //  console.log({info})
