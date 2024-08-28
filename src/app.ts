@@ -18,7 +18,7 @@
 //                                 .finally(() => console.log('Finalizo'))
 // fin clase 6 
 
-
+console.log("Hola Mundo");
 
 
 //  console.log({info})
