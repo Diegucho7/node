@@ -10,7 +10,7 @@
  
 // logger.log("Hola Mundo");
 // logger.error("Esto es algo malo");
-probandp
+
 // clase 6 inicio
 //    const {getPokemonById} = require('./src/js-fundation/06-promise')
 
